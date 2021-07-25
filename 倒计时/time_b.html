@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>东东教的思路</title>
+  <script>
+    var h,m,s;
+    function getnum() {
+      h=document.getElementById("input_h").value;
+      m=document.getElementById("input_m").value;
+      s=document.getElementById("input_s").value;
+      if (h<0||m<0||s<0){
+        alert("输入正数");
+      }
+      if (h%1!=0||m%1!=0||s%1!=0){
+        alert("输入整数");
+      }
+      else{
+        time=(h*3600)+(m*60)+s*1+1;
+        changenum();
+      }
+    }
+    function changenum() {
+      time=time-1;
+      h=Math.floor(time/3600);
+      m=Math.floor((time-h*3600)/60);
+      s=time%60;
+      if (time==0){
+        document.getElementById("show_time").innerHTML="时间到了。";
+      }
+      else{
+        document.getElementById("show_time").innerHTML="还剩："+h+"h"+m+"m"+s+"s";
+        setTimeout("changenum();",1000);
+      }
+    }
+  </script>
+</head>
+<body>
+<div>
+  <input type="number" id="input_h" value="0" min="0">h
+  <input type="number" id="input_m" value="0" min="0" max="59">m
+  <input type="number" id="input_s" value="0" min="0" max="59">s
+  <button id="start_button" onclick="getnum()">开始计时</button>
+  <div><span id="show_time"></span></div>
+</div>
+</body>
+</html>
